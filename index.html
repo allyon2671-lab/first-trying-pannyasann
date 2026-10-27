@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[店舗名] ― 飲食店ホームページ テンプレート</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#D2B58C;
+    --sand:#C19F72;
+    --latte:#AE8657;
+    --brown:#5A3C28;
+    --brown-deep:#36200F;
+    --accent:#4A2808;
+    --tan:#7A5530;
+    --ink:#2B1D14;
+    --ink-soft:#3F3025;
+    --line:rgba(54,32,15,0.18);
+    --line-tan:rgba(70,42,18,0.5);
+    --serif:'Zen Old Mincho', serif;
+    --sans:'Zen Kaku Gothic New', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--cream); color:var(--ink);
+    font-family:var(--sans); font-weight:300; line-height:2; letter-spacing:0.01em;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 40px;}
+  .ph{ color:var(--accent); }
+  .ph-light{ color:#EBD9BE; }
+  .ph-note{ display:block; font-size:11.5px; font-weight:300; letter-spacing:0.02em; margin-top:4px; opacity:0.85; }
+
+  /* ---------- Soft frame ---------- */
+  .frame-top,.frame-bottom{ position:fixed; left:14px; right:14px; height:1px; background:var(--tan); opacity:0.6; z-index:200; }
+  .frame-top{top:14px;} .frame-bottom{bottom:14px;}
+  .frame-side{ position:fixed; top:14px; bottom:14px; width:1px; background:var(--tan); opacity:0.6; z-index:200; }
+  .frame-left{left:14px;} .frame-right{right:14px;}
+  @media (max-width:640px){ .frame-top,.frame-bottom,.frame-side{ display:none; } }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:#3E281B;
+    border-bottom:1px solid rgba(220,190,140,0.45);
+  }
+  .header-inner{ display:flex; align-items:center; justify-content:space-between; padding:22px 40px; max-width:1080px; margin:0 auto; }
+  .logo{ font-family:var(--serif); font-size:20px; letter-spacing:0.1em; color:#EBD9BE; }
+  nav ul{ list-style:none; display:flex; gap:42px; margin:0; padding:0; }
+  nav a{ font-size:13.5px; letter-spacing:0.08em; position:relative; padding-bottom:4px; color:#F0E2C8; }
+  nav a::after{ content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:#DCBE8C; transition:width .3s; }
+  nav a:hover::after{ width:100%; }
+  .nav-toggle{ display:none; background:none; border:none; font-size:24px; color:#EBD9BE; cursor:pointer; }
+  @media (max-width:820px){
+    nav{ position:fixed; top:71px; left:0; right:0; background:#3E281B; border-bottom:1px solid rgba(220,190,140,0.45); max-height:0; overflow:hidden; transition:max-height .35s; }
+    nav.open{ max-height:320px; }
+    nav ul{ flex-direction:column; gap:0; padding:6px 40px 20px; }
+    nav li{ border-top:1px solid rgba(240,226,200,0.16); padding:15px 0; }
+    .nav-toggle{ display:block; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(255,240,210,0.22) 0%, transparent 62%),
+      linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%);
+    color:var(--ink); text-align:center; padding:120px 40px 100px;
+  }
+  .hero-inner{ max-width:1000px; margin:0 auto; }
+  .hero .kicker{ font-size:13px; letter-spacing:0.2em; color:var(--accent); margin-bottom:28px; }
+  .hero h1{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,6vw,60px); letter-spacing:0.12em; margin:0 0 20px; color:var(--brown-deep); }
+  .orn{ display:flex; align-items:center; justify-content:center; gap:14px; margin:0 auto 28px; max-width:220px; }
+  .orn::before,.orn::after{ content:""; flex:1; height:1px; background:var(--tan); opacity:0.9; }
+  .orn i{ width:7px; height:7px; background:var(--tan); transform:rotate(45deg); display:block; }
+  .hero .sub{ font-size:16px; max-width:38ch; margin:0 auto 48px; line-height:2.1; }
+  .hero-img{
+    aspect-ratio:16/7; border:1px solid var(--tan);
+    outline:1px solid var(--line-tan); outline-offset:8px;
+    background:repeating-linear-gradient(135deg, rgba(90,58,30,0.05) 0 2px, transparent 2px 14px), rgba(255,255,255,0.18);
+    display:flex; align-items:center; justify-content:center; font-size:13px; letter-spacing:0.05em; margin-bottom:56px;
+  }
+  .hero-meta{ display:flex; justify-content:center; gap:0; flex-wrap:wrap; font-size:13px; }
+  .hero-meta > div{ padding:4px 36px; border-left:1px solid var(--line-tan); }
+  .hero-meta > div:first-child{ border-left:none; }
+  .hero-meta strong{ display:block; font-size:13px; font-weight:500; margin-bottom:4px; color:var(--brown-deep); letter-spacing:0.1em; }
+  @media (max-width:640px){ .hero-meta > div{ border-left:none; padding:8px 20px; } }
+
+  /* ---------- Section shell ---------- */
+  section.s{ padding:110px 0; }
+  .section-head{ text-align:center; margin-bottom:64px; }
+  .section-head .en{ display:block; font-family:var(--serif); font-size:13px; letter-spacing:0.24em; color:var(--accent); margin-bottom:14px; }
+  .section-head h2{ font-family:var(--serif); font-weight:500; font-size:clamp(26px,3vw,32px); margin:0 0 22px; color:var(--brown-deep); }
+
+  /* ---------- Menu ---------- */
+  .menu-cats{ display:grid; grid-template-columns:repeat(2,1fr); gap:64px 72px; }
+  .menu-cat h3{
+    font-family:var(--serif); font-size:19px; font-weight:500; color:var(--brown-deep);
+    margin:0 0 26px; padding-bottom:12px; border-bottom:1px solid var(--tan);
+  }
+  .menu-item{ margin-bottom:20px; }
+  .menu-item .row{ display:flex; align-items:baseline; gap:8px; }
+  .menu-item .name{ font-size:15px; white-space:nowrap; }
+  .leader{ flex:1; border-bottom:1px dotted var(--line-tan); position:relative; top:-4px; }
+  .menu-item .price{ font-family:var(--serif); white-space:nowrap; font-size:15px; }
+  .menu-item .desc{ font-size:12.5px; margin-top:4px; }
+  .menu-note{ margin-top:40px; font-size:12.5px; text-align:center; }
+  @media (max-width:820px){ .menu-cats{ grid-template-columns:1fr; gap:44px; } }
+
+  /* ---------- Gallery ---------- */
+  .gallery-sec{ background:linear-gradient(180deg, var(--sand) 0%, var(--latte) 100%); border-top:1px solid var(--line-tan); border-bottom:1px solid var(--line-tan); }
+  .gallery{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  .g-item{
+    aspect-ratio:3/4; border:1px solid var(--tan);
+    background:repeating-linear-gradient(135deg, rgba(90,58,30,0.05) 0 2px, transparent 2px 14px), rgba(255,255,255,0.18);
+    display:flex; align-items:center; justify-content:center; font-size:12.5px; text-align:center; padding:10px;
+  }
+  @media (max-width:820px){ .gallery{ grid-template-columns:repeat(2,1fr); } }
+
+  /* ---------- Access ---------- */
+  .access-grid{ display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start; }
+  .map-box{
+    aspect-ratio:4/3; border:1px solid var(--tan); outline:1px solid var(--line-tan); outline-offset:6px;
+    background:var(--sand); display:flex; align-items:center; justify-content:center; color:var(--ink-soft); font-size:13px;
+  }
+  table.info{ width:100%; border-collapse:collapse; font-size:14.5px; }
+  table.info th, table.info td{ text-align:left; padding:13px 0; border-bottom:1px solid var(--line-tan); font-weight:300; }
+  table.info th{ color:var(--brown-deep); font-weight:500; width:34%; font-family:var(--serif); }
+  @media (max-width:820px){ .access-grid{ grid-template-columns:1fr; gap:40px; } }
+
+  /* ---------- SNS ---------- */
+  .sns-sec{ background:var(--latte); border-top:1px solid var(--line-tan); border-bottom:1px solid var(--line-tan); }
+  .sns-lead{ text-align:center; font-size:14px; margin:-28px auto 52px; max-width:44ch; }
+  .sns-row{ display:flex; justify-content:center; gap:48px; flex-wrap:wrap; }
+  .sns-btn{ display:flex; flex-direction:column; align-items:center; gap:18px; }
+  .sns-circle{
+    width:78px; height:78px; border-radius:50%;
+    border:1px solid var(--tan); outline:1px solid var(--line-tan); outline-offset:5px;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--brown-deep); background:rgba(255,255,255,0.18);
+    transition:background .25s, color .25s, border-color .25s, transform .25s;
+  }
+  .sns-circle svg{ width:30px; height:30px; }
+  .sns-btn:hover .sns-circle{ background:#3E281B; color:#EBD9BE; border-color:#3E281B; transform:translateY(-3px); }
+  .sns-label{ font-family:var(--serif); font-size:14px; letter-spacing:0.08em; color:var(--brown-deep); }
+  @media (max-width:640px){ .sns-row{ gap:30px; } }
+
+  /* ---------- FAQ ---------- */
+  .faq-sec{ background:var(--sand); border-top:1px solid var(--line-tan); border-bottom:1px solid var(--line-tan); }
+  .faq{ max-width:760px; margin:0 auto; }
+  .faq-item{ border-bottom:1px solid var(--line-tan); padding:26px 0; }
+  .faq-item:first-child{ border-top:1px solid var(--line-tan); }
+  .faq-item .q{ font-family:var(--serif); font-size:16px; display:flex; gap:16px; color:var(--brown-deep); }
+  .faq-item .q .mark{ color:var(--accent); }
+  .faq-item .a{ font-size:14px; margin:12px 0 0 32px; color:var(--ink-soft); }
+
+  /* ---------- Footer ---------- */
+  footer{ background:#3E281B; color:#E8D8BE; padding:72px 40px 32px; }
+  .footer-inner{ max-width:1080px; margin:0 auto; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; padding-bottom:44px; border-bottom:1px solid rgba(210,168,108,0.3); margin-bottom:24px; }
+  .footer-grid h4{ font-family:var(--serif); font-size:14px; letter-spacing:0.1em; margin:0 0 18px; color:#EBD9BE; font-weight:500; }
+  .footer-grid .fname{ font-family:var(--serif); font-size:20px; margin-bottom:14px; letter-spacing:0.08em; }
+  .footer-grid p{ font-size:13.5px; margin:0 0 8px; }
+  .footer-grid ul{ list-style:none; margin:0; padding:0; }
+  .footer-grid li{ margin-bottom:10px; font-size:13.5px; }
+  .footer-grid li a:hover{ color:#EBD9BE; }
+  .footer-bottom{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:12px; }
+  @media (max-width:820px){ .footer-grid{ grid-template-columns:1fr 1fr; gap:32px; } }
+
+  /* ---------- Luxury refinements ---------- */
+  body{ font-size:15.5px; line-height:2.15; letter-spacing:0.04em; }
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:0.04;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* header */
+  .header-inner{ padding:28px 40px; }
+  .logo{ font-size:22px; font-weight:400; letter-spacing:0.26em; }
+  nav ul{ gap:50px; }
+  nav a{ font-size:12.5px; letter-spacing:0.22em; }
+  header::after{
+    content:""; position:absolute; left:0; right:0; bottom:-5px; height:1px;
+    background:var(--tan); opacity:0.75;
+  }
+
+  /* ornament */
+  .orn{ max-width:260px; gap:16px; }
+  .orn::before{ background:linear-gradient(90deg, transparent, var(--tan)); opacity:1; }
+  .orn::after{ background:linear-gradient(270deg, transparent, var(--tan)); opacity:1; }
+  .orn i{ width:8px; height:8px; background:transparent; border:1px solid var(--accent); }
+
+  /* hero */
+  .hero{ padding:150px 40px 130px; }
+  .hero .kicker{
+    display:flex; align-items:center; justify-content:center; gap:22px;
+    font-size:12.5px; letter-spacing:0.38em; margin-bottom:36px;
+  }
+  .hero .kicker::before,.hero .kicker::after{ content:""; width:44px; height:1px; background:var(--tan); flex-shrink:0; }
+  .hero h1{ font-weight:400; font-size:clamp(40px,6.4vw,72px); letter-spacing:0.28em; padding-left:0.28em; margin-bottom:30px; }
+  .hero .sub{ font-size:15px; letter-spacing:0.14em; line-height:2.5; margin-bottom:64px; }
+  .hero-img{ outline-offset:12px; margin-bottom:76px; box-shadow:0 36px 60px -36px rgba(62,40,27,0.5); }
+  .hero-meta > div{ padding:6px 46px; }
+  .hero-meta strong{ font-weight:400; font-size:12px; letter-spacing:0.28em; margin-bottom:6px; }
+
+  /* section heads */
+  section.s{ padding:150px 0; }
+  .section-head{ margin-bottom:84px; }
+  .section-head .en{ font-size:12px; letter-spacing:0.5em; padding-left:0.5em; margin-bottom:20px; }
+  .section-head h2{ font-weight:400; font-size:clamp(28px,3.2vw,36px); letter-spacing:0.3em; padding-left:0.3em; margin-bottom:30px; }
+
+  /* menu */
+  .menu-cats{ gap:84px 100px; }
+  .menu-cat h3{
+    font-weight:400; font-size:18px; letter-spacing:0.22em;
+    padding-bottom:18px; border-bottom:none; position:relative; margin-bottom:34px;
+  }
+  .menu-cat h3::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:4px;
+    border-top:1px solid var(--tan); border-bottom:1px solid var(--tan);
+  }
+  .menu-item{ margin-bottom:28px; }
+  .menu-item .name{ letter-spacing:0.1em; }
+  .menu-item .price{ letter-spacing:0.1em; }
+  .menu-item .desc{ letter-spacing:0.08em; margin-top:6px; }
+  .menu-note{ letter-spacing:0.08em; }
+
+  /* gallery */
+  .gallery{ gap:22px; }
+  .g-item{
+    outline:1px solid var(--line-tan); outline-offset:-9px;
+    box-shadow:0 28px 40px -28px rgba(62,40,27,0.55);
+  }
+
+  /* access */
+  .access-grid{ gap:84px; }
+  .map-box{ outline-offset:12px; box-shadow:0 30px 50px -34px rgba(62,40,27,0.5); }
+  table.info th, table.info td{ padding:17px 0; }
+  table.info th{ font-weight:400; letter-spacing:0.2em; font-size:13.5px; }
+
+  /* sns */
+  .sns-row{ gap:64px; }
+  .sns-circle{ width:84px; height:84px; outline-offset:7px; }
+  .sns-label{ font-size:12.5px; letter-spacing:0.24em; padding-left:0.24em; }
+
+  /* faq */
+  .faq-item{ padding:34px 0; }
+  .faq-item .q{ font-weight:400; letter-spacing:0.1em; }
+  .faq-item .a{ letter-spacing:0.08em; }
+
+  /* footer */
+  footer{ position:relative; padding:100px 40px 36px; }
+  footer::before{ content:""; position:absolute; left:0; right:0; top:6px; height:1px; background:rgba(220,190,140,0.4); }
+  .footer-grid .fname{ font-weight:400; letter-spacing:0.28em; font-size:20px; }
+  .footer-grid h4{ font-weight:400; letter-spacing:0.32em; font-size:13px; margin-bottom:22px; }
+  .footer-grid li{ letter-spacing:0.1em; margin-bottom:12px; }
+
+  /* reveal */
+  .rv{ opacity:0; transform:translateY(20px); transition:opacity 1.1s ease, transform 1.1s ease; }
+  .rv.in{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion:reduce){ .rv{ opacity:1; transform:none; transition:none; } }
+
+  @media (max-width:640px){
+    .hero{ padding:100px 24px 90px; }
+    .hero h1{ letter-spacing:0.18em; padding-left:0.18em; }
+    .hero .kicker{ letter-spacing:0.2em; gap:14px; }
+    .hero .kicker::before,.hero .kicker::after{ width:22px; }
+    .hero-meta > div{ padding:8px 20px; }
+    section.s{ padding:100px 0; }
+    .section-head{ margin-bottom:56px; }
+    .section-head h2{ letter-spacing:0.2em; padding-left:0.2em; }
+    .menu-cats{ gap:56px; }
+    .access-grid{ gap:56px; }
+    .sns-row{ gap:36px; }
+  }
+
+  /* ---------- Tonal browns (色の組み合わせはそのまま、茶色の階調を増やす) ---------- */
+  :root{ --tan:#8B5E34; --line-tan:rgba(95,58,28,0.5); }
+
+  /* ブロンズ調の見出し */
+  .hero h1, .section-head h2{
+    color:#4A2E1E;
+    background:linear-gradient(180deg,#4A2E1E 0%,#6E4524 50%,#3A2213 100%);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .gallery-sec .section-head h2, .sns-sec .section-head h2{
+    background:linear-gradient(180deg,#3A2213 0%,#52341D 50%,#2E1B10 100%);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  /* 金茶のメタリック調(濃い背景の上の店名) */
+  .logo, .footer-grid .fname{
+    color:#E6CC9A;
+    background:linear-gradient(180deg,#F2E0B8 0%,#C9A06B 55%,#E6CC9A 100%);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  }
+
+  /* セクションごとに違う茶色のグラデーション */
+  .hero{
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(240,220,180,0.55) 0%, transparent 60%),
+      linear-gradient(180deg,#DCC49C 0%,#CFAE80 55%,#C09B6B 100%);
+  }
+  .hero-img{
+    background-image:repeating-linear-gradient(135deg, rgba(90,58,30,0.06) 0 2px, transparent 2px 14px), linear-gradient(135deg,#DCC49C,#BF9A6A);
+  }
+  #menu{ background:linear-gradient(180deg,#C09B6B 0%,#D4B88E 16%,#DCC49C 100%); }
+  .menu-cat h3{ color:#3A2213; }
+  .menu-item .price{ color:#6B3E14; }
+
+  .gallery-sec{ background:linear-gradient(180deg,#DCC49C 0%,#B98F5E 22%,#A57C4D 100%); }
+  .gallery-sec .section-head .en, .gallery-sec .ph{ color:#2E1B10; }
+  .g-item{ background-image:repeating-linear-gradient(135deg, rgba(60,36,18,0.06) 0 2px, transparent 2px 14px), linear-gradient(160deg,#D2B58C,#B08A5C); }
+  .g-item:nth-child(2){ background-image:repeating-linear-gradient(135deg, rgba(60,36,18,0.06) 0 2px, transparent 2px 14px), linear-gradient(160deg,#C4A070,#A98050); }
+  .g-item:nth-child(3){ background-image:repeating-linear-gradient(135deg, rgba(60,36,18,0.06) 0 2px, transparent 2px 14px), linear-gradient(160deg,#D9BF96,#BC9462); }
+  .g-item:nth-child(4){ background-image:repeating-linear-gradient(135deg, rgba(60,36,18,0.06) 0 2px, transparent 2px 14px), linear-gradient(160deg,#BF9A6A,#A97D4E); }
+
+  #access{ background:linear-gradient(180deg,#A57C4D 0%,#CDAE82 14%,#D9C098 100%); }
+  .map-box{ background:linear-gradient(135deg,#D8BF95,#B8905C); }
+
+  .sns-sec{ background:linear-gradient(180deg,#B98F5E 0%,#A98050 100%); }
+  .sns-sec .section-head .en, .sns-sec .sns-lead{ color:#2E1B10; }
+  .sns-circle{ background:linear-gradient(145deg,#E6D0A8,#C9A06B); }
+
+  .faq-sec{ background:linear-gradient(180deg,#A98050 0%,#CDAE82 16%,#D6BC93 100%); }
+  .faq-sec .section-head .en{ color:#2E1B10; }
+
+  footer{ background:linear-gradient(180deg,#3E281B 0%,#2E1B10 100%); }
+
+  /* ---------- Background patterns (和の七宝・菱格子を、ごく薄く) ---------- */
+  .hero{ position:relative; overflow:hidden; }
+  .hero-inner{ position:relative; }
+  .hero::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><g fill='none' stroke='rgb(90,58,30)' stroke-opacity='0.14' stroke-width='1'><circle cx='0' cy='0' r='20'/><circle cx='40' cy='0' r='20'/><circle cx='0' cy='40' r='20'/><circle cx='40' cy='40' r='20'/><circle cx='20' cy='20' r='20'/></g></svg>"); background-size:40px 40px;
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,0.15) 85%,transparent 100%);
+            mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,0.15) 85%,transparent 100%);
+  }
+  #menu{
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28'><path d='M0 14L14 0L28 14L14 28Z' fill='none' stroke='rgb(90,58,30)' stroke-opacity='0.11' stroke-width='1'/></svg>"), linear-gradient(180deg,#C09B6B 0%,#D4B88E 16%,#DCC49C 100%);
+    background-size:28px 28px, 100% 100%; background-repeat:repeat, no-repeat;
+  }
+  .gallery-sec{
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><g fill='none' stroke='rgb(255,240,210)' stroke-opacity='0.24' stroke-width='1'><circle cx='0' cy='0' r='20'/><circle cx='40' cy='0' r='20'/><circle cx='0' cy='40' r='20'/><circle cx='40' cy='40' r='20'/><circle cx='20' cy='20' r='20'/></g></svg>"), linear-gradient(180deg,#DCC49C 0%,#B98F5E 22%,#A57C4D 100%);
+    background-size:40px 40px, 100% 100%; background-repeat:repeat, no-repeat;
+  }
+  #access{
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28'><path d='M0 14L14 0L28 14L14 28Z' fill='none' stroke='rgb(90,58,30)' stroke-opacity='0.11' stroke-width='1'/></svg>"), linear-gradient(180deg,#A57C4D 0%,#CDAE82 14%,#D9C098 100%);
+    background-size:28px 28px, 100% 100%; background-repeat:repeat, no-repeat;
+  }
+  .sns-sec{
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><g fill='none' stroke='rgb(255,240,210)' stroke-opacity='0.24' stroke-width='1'><circle cx='0' cy='0' r='20'/><circle cx='40' cy='0' r='20'/><circle cx='0' cy='40' r='20'/><circle cx='40' cy='40' r='20'/><circle cx='20' cy='20' r='20'/></g></svg>"), linear-gradient(180deg,#B98F5E 0%,#A98050 100%);
+    background-size:40px 40px, 100% 100%; background-repeat:repeat, no-repeat;
+  }
+  .faq-sec{
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28'><path d='M0 14L14 0L28 14L14 28Z' fill='none' stroke='rgb(90,58,30)' stroke-opacity='0.11' stroke-width='1'/></svg>"), linear-gradient(180deg,#A98050 0%,#CDAE82 16%,#D6BC93 100%);
+    background-size:28px 28px, 100% 100%; background-repeat:repeat, no-repeat;
+  }
+  footer{
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><g fill='none' stroke='rgb(220,190,140)' stroke-opacity='0.10' stroke-width='1'><circle cx='0' cy='0' r='20'/><circle cx='40' cy='0' r='20'/><circle cx='0' cy='40' r='20'/><circle cx='40' cy='40' r='20'/><circle cx='20' cy='20' r='20'/></g></svg>"), linear-gradient(180deg,#3E281B 0%,#2E1B10 100%);
+    background-size:40px 40px, 100% 100%; background-repeat:repeat, no-repeat;
+  }
+</style>
+</head>
+<body>
+
+<div class="frame-top"></div><div class="frame-bottom"></div>
+<div class="frame-side frame-left"></div><div class="frame-side frame-right"></div>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">[店舗名]</div>
+    <button class="nav-toggle" aria-label="メニューを開く" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+    <nav>
+      <ul>
+        <li><a href="#menu">メニュー</a></li>
+        <li><a href="#gallery">空間</a></li>
+        <li><a href="#access">アクセス</a></li>
+        <li><a href="#sns">SNS</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="kicker">[エリア・業態を一言で。例:南青山 完全予約制/フレンチ]</div>
+    <h1>[店舗名]</h1>
+    <div class="orn"><i></i></div>
+    <p class="sub">
+      <span class="ph">お店の世界観を一文で伝えるキャッチコピーを入れます。</span>
+      <span class="ph ph-note">目安:20〜35文字程度。何を大切にしている店かが伝わる言葉を。</span>
+    </p>
+    <div class="hero-img ph">[メインビジュアル画像を挿入 / 推奨:横長・高解像度の店内または看板メニューの写真]</div>
+    <div class="hero-meta">
+      <div><strong>営業時間</strong><span class="ph">[11:00–20:00 など]</span></div>
+      <div><strong>定休日</strong><span class="ph">[水曜・不定休など]</span></div>
+      <div><strong>座席数</strong><span class="ph">[◯席/個室◯室]</span></div>
+      <div><strong>アクセス</strong><span class="ph">[◯◯駅から徒歩◯分]</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="en">Menu</span><h2>メニュー</h2>
+      <div class="orn"><i></i></div>
+    </div>
+    <div class="menu-cats">
+      <div class="menu-cat">
+        <h3>[カテゴリ名 例:コース料理]</h3>
+        <div class="menu-item">
+          <div class="row"><span class="name">[メニュー名]</span><span class="leader"></span><span class="price ph">¥0,000</span></div>
+          <div class="desc ph">使用食材や調理法など、一言説明を入れます</div>
+        </div>
+        <div class="menu-item">
+          <div class="row"><span class="name">[メニュー名]</span><span class="leader"></span><span class="price ph">¥0,000</span></div>
+          <div class="desc ph">使用食材や調理法など、一言説明を入れます</div>
+        </div>
+        <div class="menu-item">
+          <div class="row"><span class="name">[メニュー名]</span><span class="leader"></span><span class="price ph">¥0,000</span></div>
+        </div>
+      </div>
+      <div class="menu-cat">
+        <h3>[カテゴリ名 例:ドリンク]</h3>
+        <div class="menu-item">
+          <div class="row"><span class="name">[メニュー名]</span><span class="leader"></span><span class="price ph">¥0,000</span></div>
+          <div class="desc ph">使用食材や調理法など、一言説明を入れます</div>
+        </div>
+        <div class="menu-item">
+          <div class="row"><span class="name">[メニュー名]</span><span class="leader"></span><span class="price ph">¥0,000</span></div>
+        </div>
+        <div class="menu-item">
+          <div class="row"><span class="name">[メニュー名]</span><span class="leader"></span><span class="price ph">¥0,000</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="menu-note ph">※価格はすべて税込です。/ アレルギー表示や写真付きの詳細メニューはPDFでご案内、などの注記をここに。</p>
+  </div>
+</section>
+
+<section class="s gallery-sec" id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="en">Interior</span><h2>空間</h2>
+      <div class="orn"><i></i></div>
+    </div>
+    <div class="gallery">
+      <div class="g-item ph">[店内写真1 例:カウンター席]</div>
+      <div class="g-item ph">[店内写真2 例:個室]</div>
+      <div class="g-item ph">[店内写真3 例:テラス席]</div>
+      <div class="g-item ph">[店内写真4 例:入口・外観]</div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="access">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="en">Access</span><h2>アクセス</h2>
+      <div class="orn"><i></i></div>
+    </div>
+    <div class="access-grid">
+      <div class="map-box">[地図(Googleマップ埋め込み想定)]</div>
+      <div>
+        <table class="info">
+          <tr><th>店名</th><td class="ph">[店舗名]</td></tr>
+          <tr><th>住所</th><td class="ph">[郵便番号・都道府県から番地まで]</td></tr>
+          <tr><th>電話番号</th><td class="ph">[03-0000-0000]</td></tr>
+          <tr><th>営業時間</th><td class="ph">[ランチ/ディナーの時間帯]</td></tr>
+          <tr><th>定休日</th><td class="ph">[定休日を記載]</td></tr>
+          <tr><th>アクセス</th><td class="ph">[最寄り駅・出口・徒歩分数]</td></tr>
+          <tr><th>お支払い</th><td class="ph">[対応するクレジットカード・電子マネーなど]</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s sns-sec" id="sns">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="en">SNS</span><h2>公式SNS</h2>
+      <div class="orn"><i></i></div>
+    </div>
+    <p class="sns-lead ph">最新情報や日々の様子はSNSでも発信しています。(ここに一言の案内文を入れます)</p>
+    <div class="sns-row">
+      <a class="sns-btn" href="#" aria-label="Instagram">
+        <span class="sns-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none"/></svg></span>
+        <span class="sns-label">Instagram</span>
+      </a>
+      <a class="sns-btn" href="#" aria-label="X">
+        <span class="sns-circle"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span>
+        <span class="sns-label">X</span>
+      </a>
+      <a class="sns-btn" href="#" aria-label="LINE">
+        <span class="sns-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h14A2.5 2.5 0 0 1 21.5 7v8a2.5 2.5 0 0 1-2.5 2.5h-6.200L8 21v-3.500H5A2.5 2.5 0 0 1 2.500 15V7A2.5 2.5 0 0 1 5 4.500z"/></svg></span>
+        <span class="sns-label">LINE</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="s faq-sec" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="en">FAQ</span><h2>よくある質問</h2>
+      <div class="orn"><i></i></div>
+    </div>
+    <div class="faq">
+      <div class="faq-item">
+        <div class="q"><span class="mark">Q</span><span class="ph">[よくある質問1 例:予約はできますか?]</span></div>
+        <div class="a ph">回答をここに記載します。</div>
+      </div>
+      <div class="faq-item">
+        <div class="q"><span class="mark">Q</span><span class="ph">[よくある質問2 例:アレルギー対応は可能ですか?]</span></div>
+        <div class="a ph">回答をここに記載します。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="fname">[店舗名]</div>
+        <p class="ph-light">[住所を記載]</p>
+        <p class="ph-light">[電話番号]</p>
+      </div>
+      <div>
+        <h4>ご案内</h4>
+        <ul>
+          <li><a href="#menu">メニュー</a></li>
+          <li><a href="#gallery">空間</a></li>
+          <li><a href="#access">アクセス</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>SNS</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">X(Twitter)</a></li>
+          <li><a href="#">公式LINE</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="ph-light">© [店舗名] All Rights Reserved.</span>
+      <span class="ph-light">運営:[運営会社名]</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var sel='.hero-inner > *, .section-head, .menu-cat, .gallery, .access-grid, .sns-lead, .sns-row, .faq, .footer-grid';
+  var els=document.querySelectorAll(sel);
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:0.12});
+  els.forEach(function(el,i){
+    el.classList.add('rv');
+    if(el.parentElement && el.parentElement.classList.contains('hero-inner')){
+      el.style.transitionDelay=(Array.prototype.indexOf.call(el.parentElement.children, el)*110)+'ms';
+    }
+    io.observe(el);
+  });
+})();
+</script>
+</body>
+</html>
